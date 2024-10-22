@@ -1,0 +1,14 @@
+1. CREAR UNA DB LLAMDA proyecto_pro2
+2.ingresar las tablas de la siguiente forma
+	2.1 clientes
+	2.2 puestos
+	2.3 empleados
+	2.4 ventas
+	2.5 marcas
+	2.6 productos
+	2.7 venta detalle
+	2.8 proveedores
+	2.9 compras
+	2.10 compras_detalle
+
+SI PRESENTA FALLA POR FAVOR AVISARME

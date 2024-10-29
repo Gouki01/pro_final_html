@@ -18,7 +18,7 @@
         <div class="container mt-4 col-lg-4">
             <div class="card col-sm-10">
                 <div class="card-body">
-                    <form class="form-sign">
+                    <form class="form-sign" action="validar" method="Post">    
                         <div class="form-group tex-center">
                             <h3>Login</h3>
                             <img src="imgs/login/logo.jpg" alt="70" width="170"/>

@@ -5,11 +5,14 @@
 package Controlador;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import modelo.Empleado;
+import modelo.EmpleadoDAO;
 
 /**
  *
@@ -66,11 +69,33 @@ public class validar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    String accion = request.getParameter("accion");
+
+    if ("Ingresar".equalsIgnoreCase(accion)) {
+        String user = request.getParameter("txt_user");
+        String pass = request.getParameter("txt_pass");
+
+        EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+        Empleado empleado = empleadoDAO.validar(user, pass);
+
+        if (empleado.getUsuario() != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("usuario", empleado);
+            // Redirige al controlador con la acción "principal"
+            request.getRequestDispatcher("controlador?accion=principal").forward(request, response);
+        } else {
+            // Credenciales incorrectas, redirigir al login con un mensaje de error
+            request.setAttribute("error", "Usuario o contraseña incorrectos");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    } else {
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
+}
+
 
     /**
      * Returns a short description of the servlet.

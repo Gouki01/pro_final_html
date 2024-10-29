@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
-    <servlet>
-        <servlet-name>validar</servlet-name>
-        <servlet-class>Controlador.validar</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>controlador</servlet-name>
-        <servlet-class>Controlador.controlador</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>validar</servlet-name>
-        <url-pattern>/validar</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>controlador</servlet-name>
-        <url-pattern>/controlador</url-pattern>
-    </servlet-mapping>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    
+    <!-- Configurar ventas.jsp como la página de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>ventas.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
+

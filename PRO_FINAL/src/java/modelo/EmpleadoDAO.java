@@ -23,10 +23,12 @@ public class EmpleadoDAO {
             rs = ps.executeQuery();
             
             if (rs.next()) {
-                em.setUsuario(rs.getString("usuario"));
-                em.setDpi(rs.getString("dpi"));
-
+               em.setUsuario(rs.getString("usuario"));
+               em.setDpi(rs.getString("dpi"));
+               em.setNombres(rs.getString("nombres"));
+               em.setApellidos(rs.getString("apellidos"));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

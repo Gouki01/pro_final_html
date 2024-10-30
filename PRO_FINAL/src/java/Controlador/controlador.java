@@ -17,9 +17,37 @@ public class controlador extends HttpServlet {
         }
         
         switch (accion) {
-    case "principal":
+            
+        case "principal":
         request.getRequestDispatcher("principal.jsp").forward(request, response);
         break;
+        
+        case "Empleados":
+        request.getRequestDispatcher("Empleados.jsp").forward(request, response);
+        break;
+        
+        case "Puestos":
+        request.getRequestDispatcher("Puestos.jsp").forward(request, response);
+        break;
+        
+        case "Ventas":
+        request.getRequestDispatcher("Ventas.jsp").forward(request, response);
+        break;
+        
+        case "Compras":
+        request.getRequestDispatcher("Compras.jsp").forward(request, response);
+        break;
+        
+        case "Ventas_detalles":
+        request.getRequestDispatcher("Ventas_detalles.jsp").forward(request, response);
+        break;
+        
+        case "Compra_detalle":
+        request.getRequestDispatcher("Compra_detalle.jsp").forward(request, response);
+        break;
+        
+        
+        
     default:
         // Si no hay una acción válida, se redirige a una página de error o de inicio
         request.setAttribute("error", "Acción no válida.");

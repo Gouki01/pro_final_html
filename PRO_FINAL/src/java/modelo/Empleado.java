@@ -67,6 +67,11 @@ public class Empleado {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
+    
+    public String getNombreCompleto() {
+    return nombres + " " + apellidos;
+}
+
 
     public String getDireccion() {
         return direccion;

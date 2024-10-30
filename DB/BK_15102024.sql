@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `proyecto_pro2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `proyecto_pro2`;
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: localhost    Database: proyecto_pro2
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	8.0.40
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,7 +32,7 @@ CREATE TABLE `clientes` (
   `correo_electronico` varchar(45) DEFAULT NULL,
   `fecha_ingreso` datetime DEFAULT NULL,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +41,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,'Julio Estuardo','Cruz Alvarez','66387965',_binary '\0','59662111','jealvarez9033@gmail.com','2012-01-03 00:00:00'),(2,'Juan','Pérez','1234567',_binary '','1234-5678','juan.perez@example.com','2024-10-28 22:09:15'),(3,'María','González','987654',_binary '\0','8765-4321','maria.gonzalez@example.com','2024-10-28 22:09:15'),(4,'Carlos','Sánchez','135792',_binary '','2345-6789','carlos.sanchez@example.com','2024-10-28 22:09:15'),(5,'Lucía','Martínez','2468135',_binary '\0','5432-1987','lucia.martinez@example.com','2024-10-28 22:09:15'),(6,'Fernando','López','3692581',_binary '','1111-2222','fernando.lopez@example.com','2024-10-28 22:09:15');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +183,7 @@ CREATE TABLE `productos` (
   PRIMARY KEY (`id_producto`),
   KEY `id_marca` (`id_marca`),
   CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id_marca`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,6 +192,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (1,'Producto A',1,'Descripción del Producto A','url_imagen_a.jpg',10.00,15.00,90,'2024-10-28 16:30:23'),(2,'Producto B',1,'Descripción del Producto B','url_imagen_b.jpg',12.50,18.75,32,'2024-10-28 16:30:23'),(3,'Producto C',2,'Descripción del Producto C','url_imagen_c.jpg',8.75,13.50,89,'2024-10-28 16:30:23'),(4,'Producto D',2,'Descripción del Producto D','url_imagen_d.jpg',15.00,22.00,5,'2024-10-28 16:30:23'),(5,'Producto E',1,'Descripción del Producto E','url_imagen_e.jpg',20.00,30.00,95,'2024-10-28 16:30:23');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +210,7 @@ CREATE TABLE `proveedores` (
   `direccion` varchar(80) DEFAULT NULL,
   `telefono` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id_proveedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,6 +219,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
+INSERT INTO `proveedores` VALUES (1,'Proveedor A','1234-5678-90','Calle Falsa 123, Ciudad A','555-1234'),(2,'Proveedor B','2345-6789-01','Avenida Siempre Viva 456, Ciudad B','555-5678'),(3,'Proveedor C','3456-7890-12','Boulevard de los Sueños Rotos 789, Ciudad C','555-9012'),(4,'Proveedor D','4567-8901-23','Ruta 66, Ciudad D','555-3456'),(5,'Proveedor E','5678-9012-34','Plaza del Mercado 135, Ciudad E','555-7890');
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +262,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id_usuario`),
   KEY `id_puesto` (`id_puesto`),
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_puesto`) REFERENCES `puestos` (`id_puesto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,6 +271,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'jcruz','123456',1),(2,'usuario2','contrasena2',1),(3,'usuario3','contrasena3',2),(4,'usuario4','contrasena4',2),(5,'usuario5','contrasena5',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,17 +285,17 @@ DROP TABLE IF EXISTS `ventas`;
 CREATE TABLE `ventas` (
   `id_venta` int NOT NULL AUTO_INCREMENT,
   `no_factura` int DEFAULT NULL,
-  `serie` char(1) DEFAULT NULL,
+  `serie` char(10) DEFAULT NULL,
   `fecha_factura` date DEFAULT NULL,
   `id_cliente` int DEFAULT NULL,
   `id_empleado` int DEFAULT NULL,
-  `fecha_ingreso` datetime DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
   PRIMARY KEY (`id_venta`),
   KEY `id_cliente` (`id_cliente`),
   KEY `id_empleado` (`id_empleado`),
   CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
   CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,6 +304,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
+INSERT INTO `ventas` VALUES (1,123,'C','2024-10-25',1,3,'2024-10-26'),(2,123,'B','2024-10-21',1,4,'2024-10-26'),(3,3,'A','2024-10-14',1,4,'2024-10-15'),(4,4,'D','2024-10-21',1,5,'2024-10-22'),(5,5,'F','2024-10-15',1,4,'2024-10-16'),(6,55,'G','2024-10-16',1,5,'2024-10-16'),(7,6,'H','2024-10-22',5,4,'2024-10-22'),(8,7,'I','2024-10-29',3,4,'2024-10-29'),(9,8,'J','2024-10-25',4,3,'2024-10-25'),(10,9,'K','2024-10-19',6,1,'2024-10-19'),(11,10,'A','2024-10-29',3,5,'2024-10-29'),(12,25,'G','2024-10-20',4,2,'2024-10-20'),(13,100,'A','2024-10-22',4,4,'2024-10-24'),(14,2525,'A','2024-10-20',2,2,'2024-10-21'),(15,123,'E','2024-10-20',1,1,'2024-10-27'),(16,123,'E','2024-10-30',2,2,'2024-10-30'),(17,15363,'F','2024-10-27',1,2,'2024-10-29'),(18,23546,'E','2024-10-29',2,3,'2024-10-30'),(19,111,'X','2024-10-30',2,2,'2024-10-30'),(20,333,'A','2024-10-30',2,2,'2024-10-30');
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,7 +326,7 @@ CREATE TABLE `ventas_detalle` (
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `ventas_detalle_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id_venta`),
   CONSTRAINT `ventas_detalle_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,16 +335,9 @@ CREATE TABLE `ventas_detalle` (
 
 LOCK TABLES `ventas_detalle` WRITE;
 /*!40000 ALTER TABLE `ventas_detalle` DISABLE KEYS */;
+INSERT INTO `ventas_detalle` VALUES (1,3,1,1,15.00),(2,4,2,2,15.00),(3,5,3,2,15.00),(4,6,5,5,15.00),(5,7,3,2,20.00),(6,8,5,5,30.00),(7,9,1,9,35.00),(8,10,5,10,40.00),(9,11,4,30,25.00),(10,12,3,96,50.00),(11,13,2,10,30.00),(12,14,3,2,13.50),(13,16,2,1,18.75),(14,17,5,5,30.00),(15,18,2,5,18.75),(16,19,3,4,13.50),(17,20,3,5,13.50);
 /*!40000 ALTER TABLE `ventas_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'proyecto_pro2'
---
-
---
--- Dumping routines for database 'proyecto_pro2'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -352,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-27 17:46:29
+-- Dump completed on 2024-10-30 17:41:30

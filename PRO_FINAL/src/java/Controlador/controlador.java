@@ -37,15 +37,7 @@ public class controlador extends HttpServlet {
         case "Compras":
         request.getRequestDispatcher("Compras.jsp").forward(request, response);
         break;
-        
-        case "Ventas_detalles":
-        request.getRequestDispatcher("Ventas_detalles.jsp").forward(request, response);
-        break;
-        
-        case "Compra_detalle":
-        request.getRequestDispatcher("Compra_detalle.jsp").forward(request, response);
-        break;
-        
+              
         
         
     default:

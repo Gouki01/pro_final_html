@@ -31,9 +31,7 @@
                     </button>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="controlador?accion=Ventas" target="myFrame">Ventas</a></li>
-                      <li><a class="dropdown-item" href="controlador?accion=Compras" target="myFrame">Compras</a></li>
-                      <li><a class="dropdown-item" href="controlador?accion=Ventas_detalles" target="myFrame">Ventas Detalle</a></li>
-                      <li><a class="dropdown-item" href="controlador?accion=Compra_detalle" target="myFrame">Compras Detalle</a></li>
+                      <li><a class="dropdown-item" href="controlador?accion=Compras" target="myFrame">Compras</a></li>                      
                     </ul>
                   </div>
                   <div class="dropdown">

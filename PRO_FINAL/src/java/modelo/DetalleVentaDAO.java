@@ -12,7 +12,7 @@ public class DetalleVentaDAO {
         Connection conn = null;
 
         try {
-            conn = conexion.getConnection(); // Obtener la conexión de la clase Conexion
+            conn = conexion.getConnection(); 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, idVenta);
             pstmt.setInt(2, idProducto);
@@ -25,7 +25,7 @@ public class DetalleVentaDAO {
             return false; 
         } finally {
             if (conn != null) {
-                conexion.cerrar_conexion(); // Cerrar la conexión sin parámetros
+                conexion.cerrar_conexion(); 
             }
         }
     }

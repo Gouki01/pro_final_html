@@ -56,12 +56,12 @@ CREATE TABLE `compras` (
   `id_compra` int NOT NULL AUTO_INCREMENT,
   `no_orden_compra` int DEFAULT NULL,
   `id_proveedor` int DEFAULT NULL,
-  `fecha_orden` date DEFAULT NULL,
+  `fecha_orden` datetime DEFAULT NULL,
   `fecha_ingreso` datetime DEFAULT NULL,
   PRIMARY KEY (`id_compra`),
   KEY `id_proveedor` (`id_proveedor`),
   CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +70,7 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
+INSERT INTO `compras` VALUES (1,213,2,'2024-10-21 06:00:00','2024-10-23 02:48:00'),(2,213,2,'2024-10-14 06:00:00','2024-10-16 02:51:00'),(3,213,2,'2024-10-02 06:00:00','2024-10-04 03:11:00'),(4,555,2,'2024-10-09 06:00:00','2024-10-11 03:26:00');
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +92,7 @@ CREATE TABLE `compras_detalle` (
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `compras_detalle_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id_compra`),
   CONSTRAINT `compras_detalle_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,6 +101,7 @@ CREATE TABLE `compras_detalle` (
 
 LOCK TABLES `compras_detalle` WRITE;
 /*!40000 ALTER TABLE `compras_detalle` DISABLE KEYS */;
+INSERT INTO `compras_detalle` VALUES (1,1,2,2,12.50),(2,2,3,2,8.75),(3,3,4,10,15.00),(4,4,4,10,15.00);
 /*!40000 ALTER TABLE `compras_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +194,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Producto A',1,'Descripción del Producto A','url_imagen_a.jpg',10.00,15.00,90,'2024-10-28 16:30:23'),(2,'Producto B',1,'Descripción del Producto B','url_imagen_b.jpg',12.50,18.75,32,'2024-10-28 16:30:23'),(3,'Producto C',2,'Descripción del Producto C','url_imagen_c.jpg',8.75,13.50,89,'2024-10-28 16:30:23'),(4,'Producto D',2,'Descripción del Producto D','url_imagen_d.jpg',15.00,22.00,5,'2024-10-28 16:30:23'),(5,'Producto E',1,'Descripción del Producto E','url_imagen_e.jpg',20.00,30.00,95,'2024-10-28 16:30:23');
+INSERT INTO `productos` VALUES (1,'Producto A',1,'Descripción del Producto A','url_imagen_a.jpg',10.00,15.00,90,'2024-10-28 16:30:23'),(2,'Producto B',1,'Descripción del Producto B','url_imagen_b.jpg',12.50,18.75,32,'2024-10-28 16:30:23'),(3,'Producto C',2,'Descripción del Producto C','url_imagen_c.jpg',8.75,13.50,89,'2024-10-28 16:30:23'),(4,'Producto D',2,'Descripción del Producto D','url_imagen_d.jpg',15.00,18.75,0,'2024-10-28 16:30:23'),(5,'Producto E',1,'Descripción del Producto E','url_imagen_e.jpg',20.00,30.00,95,'2024-10-28 16:30:23');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +297,7 @@ CREATE TABLE `ventas` (
   KEY `id_empleado` (`id_empleado`),
   CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
   CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,7 +306,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
-INSERT INTO `ventas` VALUES (1,123,'C','2024-10-25',1,3,'2024-10-26'),(2,123,'B','2024-10-21',1,4,'2024-10-26'),(3,3,'A','2024-10-14',1,4,'2024-10-15'),(4,4,'D','2024-10-21',1,5,'2024-10-22'),(5,5,'F','2024-10-15',1,4,'2024-10-16'),(6,55,'G','2024-10-16',1,5,'2024-10-16'),(7,6,'H','2024-10-22',5,4,'2024-10-22'),(8,7,'I','2024-10-29',3,4,'2024-10-29'),(9,8,'J','2024-10-25',4,3,'2024-10-25'),(10,9,'K','2024-10-19',6,1,'2024-10-19'),(11,10,'A','2024-10-29',3,5,'2024-10-29'),(12,25,'G','2024-10-20',4,2,'2024-10-20'),(13,100,'A','2024-10-22',4,4,'2024-10-24'),(14,2525,'A','2024-10-20',2,2,'2024-10-21'),(15,123,'E','2024-10-20',1,1,'2024-10-27'),(16,123,'E','2024-10-30',2,2,'2024-10-30'),(17,15363,'F','2024-10-27',1,2,'2024-10-29'),(18,23546,'E','2024-10-29',2,3,'2024-10-30'),(19,111,'X','2024-10-30',2,2,'2024-10-30'),(20,333,'A','2024-10-30',2,2,'2024-10-30');
+INSERT INTO `ventas` VALUES (1,123,'C','2024-10-25',1,3,'2024-10-26'),(2,123,'B','2024-10-21',1,4,'2024-10-26'),(3,3,'A','2024-10-14',1,4,'2024-10-15'),(4,4,'D','2024-10-21',1,5,'2024-10-22'),(5,5,'F','2024-10-15',1,4,'2024-10-16'),(6,55,'G','2024-10-16',1,5,'2024-10-16'),(7,6,'H','2024-10-22',5,4,'2024-10-22'),(8,7,'I','2024-10-29',3,4,'2024-10-29'),(9,8,'J','2024-10-25',4,3,'2024-10-25'),(10,9,'K','2024-10-19',6,1,'2024-10-19'),(11,10,'A','2024-10-29',3,5,'2024-10-29'),(12,25,'G','2024-10-20',4,2,'2024-10-20'),(13,100,'A','2024-10-22',4,4,'2024-10-24'),(14,2525,'A','2024-10-20',2,2,'2024-10-21'),(15,123,'E','2024-10-20',1,1,'2024-10-27'),(16,123,'E','2024-10-30',2,2,'2024-10-30'),(17,15363,'F','2024-10-27',1,2,'2024-10-29'),(18,23546,'E','2024-10-29',2,3,'2024-10-30'),(19,111,'X','2024-10-30',2,2,'2024-10-30'),(20,333,'A','2024-10-30',2,2,'2024-10-30'),(21,9999,'P','2024-10-20',5,2,'2024-10-30'),(22,3333,'F','2024-10-15',3,4,'2024-10-16');
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +328,7 @@ CREATE TABLE `ventas_detalle` (
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `ventas_detalle_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id_venta`),
   CONSTRAINT `ventas_detalle_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +337,7 @@ CREATE TABLE `ventas_detalle` (
 
 LOCK TABLES `ventas_detalle` WRITE;
 /*!40000 ALTER TABLE `ventas_detalle` DISABLE KEYS */;
-INSERT INTO `ventas_detalle` VALUES (1,3,1,1,15.00),(2,4,2,2,15.00),(3,5,3,2,15.00),(4,6,5,5,15.00),(5,7,3,2,20.00),(6,8,5,5,30.00),(7,9,1,9,35.00),(8,10,5,10,40.00),(9,11,4,30,25.00),(10,12,3,96,50.00),(11,13,2,10,30.00),(12,14,3,2,13.50),(13,16,2,1,18.75),(14,17,5,5,30.00),(15,18,2,5,18.75),(16,19,3,4,13.50),(17,20,3,5,13.50);
+INSERT INTO `ventas_detalle` VALUES (1,3,1,1,15.00),(2,4,2,2,15.00),(3,5,3,2,15.00),(4,6,5,5,15.00),(5,7,3,2,20.00),(6,8,5,5,30.00),(7,9,1,9,35.00),(8,10,5,10,40.00),(9,11,4,30,25.00),(10,12,3,96,50.00),(11,13,2,10,30.00),(12,14,3,2,13.50),(13,16,2,1,18.75),(14,17,5,5,30.00),(15,18,2,5,18.75),(16,19,3,4,13.50),(17,20,3,5,13.50),(18,21,4,5,22.00),(19,22,4,10,18.75);
 /*!40000 ALTER TABLE `ventas_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -348,4 +350,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-30 17:41:30
+-- Dump completed on 2024-10-30 21:50:51

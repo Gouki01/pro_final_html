@@ -55,7 +55,7 @@ public class VentasServlet extends HttpServlet {
             int id_producto = Integer.parseInt(idProductoStr);
             int cantidad = Integer.parseInt(cantidadStr);
 
-            // Parseo de fecha con datetime-local
+           
             SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date fecha_factura;
             try {

@@ -13,7 +13,7 @@ public class controlador extends HttpServlet {
         String accion = request.getParameter("accion");
         
         if (accion == null) {
-            accion = "default"; // Establecemos un valor por defecto si no hay "accion"
+            accion = "default"; 
         }
         
         switch (accion) {
@@ -41,7 +41,7 @@ public class controlador extends HttpServlet {
         
         
     default:
-        // Si no hay una acción válida, se redirige a una página de error o de inicio
+        
         request.setAttribute("error", "Acción no válida.");
         request.getRequestDispatcher("index.jsp").forward(request, response);
         break;

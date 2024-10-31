@@ -84,18 +84,18 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
         if (empleado.getUsuario() != null) {
             HttpSession session = request.getSession();
             session.setAttribute("usuario", empleado);
-            // Redirige al controlador con la acción "principal"
             request.setAttribute("nombres", empleado);
             request.getRequestDispatcher("controlador?accion=principal").forward(request, response);
         } else {
             // Credenciales incorrectas, redirigir al login con un mensaje de error
-            request.setAttribute("error", "Usuario o contraseña incorrectos");
+            request.setAttribute("error", "Usuario o contraseña incorrectos. Vuelva a intentarlo.");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     } else {
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }
+
 
 
     /**

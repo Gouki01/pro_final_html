@@ -1,10 +1,17 @@
+<%@page import="modelo.PuestoDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Empleado"%>
 <%@page import="modelo.EmpleadoDAO"%>
+<%@page import="modelo.Puesto"%>
+
 <%
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     List<Empleado> empleados = empleadoDAO.listar();
     Empleado empleadoSeleccionado = (Empleado) request.getAttribute("empleadoSeleccionado");
+
+    // Obtener la lista de puestos
+    PuestoDAO puestoDAO = new PuestoDAO();
+    List<Puesto> puestos = puestoDAO.listar();
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -46,7 +53,12 @@
                         </div>
                         <div class="form-group">
                             <label>Genero</label>
-                            <input type="text" name="txtgenero" class="form-control" value="<%= empleadoSeleccionado != null ? empleadoSeleccionado.getGenero() : "" %>">
+                            <div class="form-group">
+                                <select name="txtgenero" class="form-control">
+                                    <option value="1" <%= (empleadoSeleccionado != null && empleadoSeleccionado.getGenero() == 1) ? "selected" : "" %>>Masculino</option>
+                                    <option value="0" <%= (empleadoSeleccionado != null && empleadoSeleccionado.getGenero() == 0) ? "selected" : "" %>>Femenino</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -56,7 +68,15 @@
                         </div>
                         <div class="form-group">
                             <label>Puesto</label>
-                            <input type="text" name="txtpuesto" class="form-control" value="<%= empleadoSeleccionado != null ? empleadoSeleccionado.getIdpuesto() : "" %>">
+                            <select name="txtpuesto" class="form-control">
+                                <option value="">Seleccione un puesto</option>
+                                <% for (Puesto puesto : puestos) { %>
+                                    <option value="<%= puesto.getId_puesto() %>"
+                                        <%= (empleadoSeleccionado != null && empleadoSeleccionado.getIdpuesto() == puesto.getId_puesto()) ? "selected" : "" %>>
+                                        <%= puesto.getPuesto() %>
+                                    </option>
+                                <% } %>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Fecha de inicio laboral</label>
@@ -75,8 +95,9 @@
                             <button type="submit" class="btn <%= empleadoSeleccionado != null ? "btn-primary" : "btn-success" %>" name="accion" value="<%= empleadoSeleccionado != null ? "Actualizar" : "Agregar" %>">
                                 <%= empleadoSeleccionado != null ? "Actualizar" : "Agregar" %>
                             </button>
-
                             <button type="submit" class="btn btn-danger" name="accion" value="Eliminar">Eliminar</button>
+                            <!-- Botón de cancelar selección -->
+                            <a href="Empleados.jsp" class="btn btn-secondary">Cancelar</a>
                         </div>
                     </div>
                 </div>

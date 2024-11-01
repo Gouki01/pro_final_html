@@ -25,10 +25,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Proveedores</a>
+                            <a href="controlador?accion=Proveedores" target="myFrame" style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Proveedores</a>
                         </li>
                         <li class="nav-item">
-                            <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Clientes</a>
+                            <a href="controlador?accion=Clientes" target="myFrame" style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Clientes</a>
                         </li>                        
                         <div class="dropdown">
                             <button style="border: none" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

@@ -34,11 +34,17 @@ public class controlador extends HttpServlet {
         request.getRequestDispatcher("Ventas.jsp").forward(request, response);
         break;
         
+        case "Clientes":
+        request.getRequestDispatcher("Clientes.jsp").forward(request, response);
+        break;    
+        
         case "Compras":
         request.getRequestDispatcher("Compras.jsp").forward(request, response);
         break;
-              
-        
+
+        case "Proveedores":
+        request.getRequestDispatcher("Proveedores.jsp").forward(request, response);
+        break;
         
     default:
         // Si no hay una acción válida, se redirige a una página de error o de inicio

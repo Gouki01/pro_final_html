@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import java.sql.*;
@@ -12,7 +8,7 @@ public class VentaDAO {
     Conexion conexion = new Conexion();
 
     public boolean insertar(Venta venta) {
-        String sql = "INSERT INTO ventas (no_factura, serie, fecha_factura, id_cliente, id_empleado, fecha_ingreso) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ventas (no_factura, serie, fecha_factura, id_cliente, id_empleado, fecha_ingreso, precio_total) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection conn = null;
 
         try {
@@ -21,10 +17,11 @@ public class VentaDAO {
 
             pstmt.setInt(1, venta.getNo_factura());
             pstmt.setString(2, venta.getSerie());
-            pstmt.setDate(3, new java.sql.Date(venta.getFecha_factura().getTime()));
+            pstmt.setTimestamp(3, new Timestamp(venta.getFecha_factura().getTime()));
             pstmt.setInt(4, venta.getId_cliente());
             pstmt.setInt(5, venta.getId_empleado());
-            pstmt.setDate(6, new java.sql.Date(venta.getFecha_ingreso().getTime()));
+            pstmt.setTimestamp(6, new Timestamp(venta.getFecha_ingreso().getTime()));
+            pstmt.setDouble(7, venta.getPrecio_total());
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
@@ -34,9 +31,12 @@ public class VentaDAO {
                     }
                 }
                 return true;
+            } else {
+                System.out.println("No rows affected. Check if the table or fields are correct.");
             }
         } catch (SQLException e) {
-            System.out.println("Error al insertar venta: " + e.getMessage());
+            System.out.println("SQL Error during `insertar` in `VentaDAO`: " + e.getMessage());
+            e.printStackTrace();
             return false;
         } finally {
             if (conn != null) {
@@ -46,8 +46,33 @@ public class VentaDAO {
         return false;
     }
 
-    public List<Venta> listar() {
-        List<Venta> lista = new ArrayList<>();
+    public boolean actualizarTotalVenta(int idVenta, double total) {
+        String sql = "UPDATE ventas SET precio_total = ? WHERE id_venta = ?";
+        Connection conn = null;
+
+        try {
+            conn = conexion.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setDouble(1, total);
+            pstmt.setInt(2, idVenta);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el total de la venta: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (conn != null) {
+                conexion.cerrar_conexion();
+            }
+        }
+    }
+
+    // Método opcional para listar todas las ventas, útil para depuración o reportes
+    public List<Venta> listarVentas() {
+        List<Venta> listaVentas = new ArrayList<>();
         String sql = "SELECT * FROM ventas";
         Connection conn = null;
 
@@ -57,24 +82,27 @@ public class VentaDAO {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Venta venta = new Venta(
-                    rs.getInt("id_venta"),
-                    rs.getInt("no_factura"),
-                    rs.getString("serie"),
-                    rs.getDate("fecha_factura"),
-                    rs.getInt("id_cliente"),
-                    rs.getInt("id_empleado"),
-                    rs.getDate("fecha_ingreso")
-                );
-                lista.add(venta);
+                Venta venta = new Venta();
+                venta.setId_venta(rs.getInt("id_venta"));
+                venta.setNo_factura(rs.getInt("no_factura"));
+                venta.setSerie(rs.getString("serie"));
+                venta.setFecha_factura(rs.getTimestamp("fecha_factura"));
+                venta.setId_cliente(rs.getInt("id_cliente"));
+                venta.setId_empleado(rs.getInt("id_empleado"));
+                venta.setFecha_ingreso(rs.getTimestamp("fecha_ingreso"));
+                venta.setPrecio_total(rs.getDouble("precio_total"));
+                listaVentas.add(venta);
             }
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             System.out.println("Error al listar ventas: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             if (conn != null) {
                 conexion.cerrar_conexion();
             }
         }
-        return lista;
+        return listaVentas;
     }
 }

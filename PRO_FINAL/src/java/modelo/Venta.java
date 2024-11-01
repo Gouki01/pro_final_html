@@ -2,10 +2,6 @@ package modelo;
 
 import java.util.Date;
 
-/**
- *
- * @author jealv
- */
 public class Venta {
     private int id_venta; 
     private int no_factura; 
@@ -13,23 +9,25 @@ public class Venta {
     private Date fecha_factura; 
     private int id_cliente; 
     private int id_empleado; 
-    private Date fecha_ingreso; 
+    private Date fecha_ingreso;
+    private double precio_total;
 
-    
+    // Constructor vacío
     public Venta() {}
 
-    
-    public Venta(int id_venta, int no_factura, String serie, Date fecha_factura, int id_cliente, int id_empleado, Date fecha_ingreso) {
-        this.id_venta = id_venta;  
-        this.no_factura = no_factura; 
+    // Constructor completo
+    public Venta(int id_venta, int no_factura, String serie, Date fecha_factura, int id_cliente, int id_empleado, Date fecha_ingreso, double precio_total) {
+        this.id_venta = id_venta;
+        this.no_factura = no_factura;
         this.serie = serie;
-        this.fecha_factura = fecha_factura; 
-        this.id_cliente = id_cliente; 
-        this.id_empleado = id_empleado; 
+        this.fecha_factura = fecha_factura;
+        this.id_cliente = id_cliente;
+        this.id_empleado = id_empleado;
         this.fecha_ingreso = fecha_ingreso;
+        this.precio_total = precio_total;
     }
 
-    
+    // Getters y Setters
     public int getId_venta() {
         return id_venta;
     }
@@ -84,5 +82,13 @@ public class Venta {
 
     public void setFecha_ingreso(Date fecha_ingreso) {
         this.fecha_ingreso = fecha_ingreso;
+    }
+
+    public double getPrecio_total() {
+        return precio_total;
+    }
+
+    public void setPrecio_total(double precio_total) {
+        this.precio_total = precio_total;
     }
 }

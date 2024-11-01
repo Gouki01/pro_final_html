@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DetalleVentaDAO {
    
     public boolean insertarDetalle(int idVenta, int idProducto, int cantidad, double precioUnitario) {
-        String sql = "INSERT INTO ventas_detalle (id_venta, id_producto, cantidad, precio_unitario) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO ventas_detalle (id_venta, id_producto, cantidad, precio_unitario, precio_total) VALUES (?, ?, ?, ?, ?)";
         Conexion conexion = new Conexion();
         Connection conn = null;
 
@@ -18,6 +18,11 @@ public class DetalleVentaDAO {
             pstmt.setInt(2, idProducto);
             pstmt.setInt(3, cantidad);
             pstmt.setDouble(4, precioUnitario);
+
+            // Calcular el precio total y asignarlo al campo correspondiente
+            double precioTotal = cantidad * precioUnitario;
+            pstmt.setDouble(5, precioTotal);
+
             int filasAfectadas = pstmt.executeUpdate();
             return filasAfectadas > 0; 
         } catch (SQLException e) {

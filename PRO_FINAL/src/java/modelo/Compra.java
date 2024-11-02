@@ -58,4 +58,8 @@ public class Compra {
     public void setFechaIngreso(Timestamp fecha_ingreso) {
         this.fecha_ingreso = fecha_ingreso;
     }
+
+    public void setPrecio_total(double totalGeneral) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

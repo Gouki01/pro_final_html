@@ -88,6 +88,12 @@
             document.getElementById("totalGeneral").innerText = totalGeneral.toFixed(2);
             renderCartTable();
         }
+
+        function addCartItemsToForm() {
+            // Asignar el valor del total general al campo oculto antes de enviar el formulario
+            document.getElementById("precio_total").value = totalGeneral.toFixed(2);
+            return true;
+        }
     </script>
     <style>
         .custom-header th {
@@ -118,6 +124,19 @@
         .table-container {
             margin-top: 20px;
         }
+        .gear-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -127,11 +146,18 @@
                 <i class="fas fa-history me-2"></i> Ver Historial de Ventas
             </a>
         </div>
+        
+        <!-- Botón de Opciones con Icono de Engranaje -->
+        <a href="login.jsp" class="gear-icon">
+            <i class="fas fa-cog"></i>
+        </a>
+
         <h3>Formulario de Venta</h3>
 
         <!-- Contenedor de Información General -->
         <div class="form-container">
             <form id="ventasForm" action="${pageContext.request.contextPath}/VentasServlet" method="post" onsubmit="return addCartItemsToForm()">
+                <input type="hidden" id="precio_total" name="precio_total" value="0.00"> <!-- Campo oculto para el total general -->
                 <div class="row mb-3">
                     <div class="col">
                         <label>Número de Factura:</label>

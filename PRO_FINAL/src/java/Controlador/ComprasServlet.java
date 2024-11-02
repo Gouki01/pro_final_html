@@ -25,19 +25,15 @@ public class ComprasServlet extends HttpServlet {
         int noOrdenCompra = Integer.parseInt(request.getParameter("no_orden_compra"));
         int idProveedor = Integer.parseInt(request.getParameter("id_proveedor"));
         
-        
         String fechaOrdenStr = request.getParameter("fecha_orden");
         String fechaIngresoStr = request.getParameter("fecha_ingreso");
 
-      
         Timestamp fechaOrden = parseTimestamp(fechaOrdenStr);
         Timestamp fechaIngreso = parseTimestamp(fechaIngresoStr);
 
-        
         Compra compra = new Compra(0, noOrdenCompra, idProveedor, fechaOrden, fechaIngreso);
         List<CompraDetalle> detalles = new ArrayList<>();
 
-       
         String[] productos = request.getParameterValues("id_producto");
         String[] cantidades = request.getParameterValues("cantidad");
         String[] precios = request.getParameterValues("precio_costo_unitario");
@@ -51,7 +47,6 @@ public class ComprasServlet extends HttpServlet {
             detalles.add(compraDetalle);
         }
 
-       
         CompraDAO compraDAO = new CompraDAO();
         boolean resultado = compraDAO.insertarCompraYDetalles(compra, detalles);
 
@@ -62,7 +57,6 @@ public class ComprasServlet extends HttpServlet {
         }
     }
 
-    
     private Timestamp parseTimestamp(String dateTimeStr) {
         try {
             if (dateTimeStr.length() == 10) { 

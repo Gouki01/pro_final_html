@@ -20,6 +20,10 @@ public class CompraDetalle {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public CompraDetalle(int i, int i0, int idProducto, int cantidad, double precioCostoUnitario, double subtotal) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
     public int getIdCompraDetalle() {
         return id_compra_detalle;

@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
         let cartItems = [];
-        let totalGeneral = 0.0;
 
         function updatePriceAndStock() {
             var select = document.getElementById("id_producto");
@@ -36,9 +35,6 @@
             }
 
             let subtotal = cantidad * precio;
-            totalGeneral += subtotal;
-            document.getElementById("totalGeneral").innerText = totalGeneral.toFixed(2);
-
             cartItems.push({ id: productoID, nombre: producto, cantidad, precio, subtotal });
             renderCartTable();
         }
@@ -76,8 +72,6 @@
 
         function cancelarCompra() {
             cartItems = [];
-            totalGeneral = 0.0;
-            document.getElementById("totalGeneral").innerText = totalGeneral.toFixed(2);
             renderCartTable();
         }
 
@@ -108,13 +102,6 @@
                 form.appendChild(precioField);
             });
 
-            let totalField = document.createElement("input");
-            totalField.type = "hidden";
-            totalField.name = "totalGeneral";
-            totalField.value = totalGeneral.toFixed(2);
-            totalField.classList.add("productField");
-            form.appendChild(totalField);
-
             return true;
         }
     </script>
@@ -139,6 +126,19 @@
         .table-container {
             margin-top: 20px;
         }
+        .gear-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -149,9 +149,13 @@
             </a>
         </div>
         
+        <!-- Botón de Opciones con Icono de Engranaje -->
+        <a href="login.jsp" class="gear-icon">
+            <i class="fas fa-cog"></i>
+        </a>
+        
         <h3>Formulario de Compra</h3>
         
-        <!-- Contenedor 1 -->
         <div class="form-container">
             <form id="comprasForm" action="${pageContext.request.contextPath}/ComprasServlet" method="post" onsubmit="return addCartItemsToForm()">
                 <div class="row mb-3">
@@ -170,7 +174,6 @@
                 </div>
         </div>
 
-        <!-- Contenedor 2 -->
         <div class="product-container">
             <div class="row mb-3">
                 <div class="col">
@@ -233,26 +236,20 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <h5>Total General: <span id="totalGeneral">0.00</span></h5>
-                </div>
-                <div class="col d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary me-2" onclick="addToCart()">
-                        <i class="fas fa-cart-plus me-2"></i> Agregar Producto
-                    </button>
-                    <button type="submit" class="btn btn-success me-2">
-                        <i class="fas fa-floppy-disk me-2"></i> Guardar Compra
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="cancelarCompra()">
-                        <i class="fas fa-times-circle me-2"></i> Cancelar Compra
-                    </button>
-                </div>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary me-2" onclick="addToCart()">
+                    <i class="fas fa-cart-plus me-2"></i> Agregar Producto
+                </button>
+                <button type="submit" class="btn btn-success me-2">
+                    <i class="fas fa-floppy-disk me-2"></i> Guardar Compra
+                </button>
+                <button type="button" class="btn btn-danger" onclick="cancelarCompra()">
+                    <i class="fas fa-times-circle me-2"></i> Cancelar Compra
+                </button>
             </div>
         </div>
         </form>
 
-        <!-- Tabla del carrito -->
         <h4>Carrito de Productos</h4>
         <div class="cart-table">
             <table class="table table-striped table-bordered text-center">

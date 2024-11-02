@@ -34,4 +34,8 @@ public class DetalleVentaDAO {
             }
         }
     }
+
+    public boolean insertarDetalle(int id_venta, int id_producto, int cantidad, double precio_unitario, double subtotal) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

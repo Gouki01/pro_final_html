@@ -51,8 +51,7 @@ public class VentasServlet extends HttpServlet {
             int id_cliente = Integer.parseInt(idClienteStr);
             int id_empleado = Integer.parseInt(idEmpleadoStr);
 
-
-            // Parseo de fecha con datetime-local<<<<<<< HEAD=======>>>>>>> a6ed828 (ventas_ventas_detalle)
+            // Parseo de fecha con datetime-local
             SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date fecha_factura = dateTimeFormat.parse(fechaFacturaStr);
             Date fecha_ingreso = dateTimeFormat.parse(fechaIngresoStr);

@@ -38,9 +38,11 @@ public class DetalleVentasServlet extends HttpServlet {
             int id_producto = Integer.parseInt(idProductoStr);
             int cantidad = Integer.parseInt(cantidadStr);
             double precio_unitario = Double.parseDouble(precioUnitarioStr);
+            double subtotal = cantidad * precio_unitario; // Calcular subtotal
 
+            // Insertar el detalle de venta con el subtotal
             DetalleVentaDAO detalleVentaDAO = new DetalleVentaDAO();
-            boolean resultado = detalleVentaDAO.insertarDetalle(id_venta, id_producto, cantidad, precio_unitario);
+            boolean resultado = detalleVentaDAO.insertarDetalle(id_venta, id_producto, cantidad, precio_unitario, subtotal);
 
             if (resultado) {
                 Conexion conn = new Conexion();
@@ -48,25 +50,39 @@ public class DetalleVentasServlet extends HttpServlet {
 
                 try {
                     conexionBD = conn.getConnection();
+
+                    // Actualizar el stock del producto
                     String updateProductQuery = "UPDATE productos SET existencia = existencia - ? WHERE id_producto = ?";
                     try (PreparedStatement pstmt = conexionBD.prepareStatement(updateProductQuery)) {
                         pstmt.setInt(1, cantidad);
                         pstmt.setInt(2, id_producto);
                         pstmt.executeUpdate();
                     }
+
+                    // Actualizar el total general en la tabla `ventas`
+                    String updateTotalVentaQuery = "UPDATE ventas SET precio_total = precio_total + ? WHERE id_venta = ?";
+                    try (PreparedStatement pstmt = conexionBD.prepareStatement(updateTotalVentaQuery)) {
+                        pstmt.setDouble(1, subtotal);
+                        pstmt.setInt(2, id_venta);
+                        pstmt.executeUpdate();
+                    }
+
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    response.sendRedirect("ventas.jsp?id_venta=" + id_venta + "&status=error&message=" + e.getMessage());
+                    return;
                 } finally {
                     if (conexionBD != null) {
                         conn.cerrar_conexion();
                     }
                 }
 
-                response.sendRedirect("ventas.jsp?id_venta=" + id_venta);
+                // Redirigir al formulario de ventas con éxito
+                response.sendRedirect("ventas.jsp?id_venta=" + id_venta + "&status=success");
             } else {
                 out.println("<h1>Error al registrar el detalle de la venta.</h1>");
+                out.println("<a href='ventas.jsp'>Volver</a>");
             }
-            out.println("<a href='ventas.jsp'>Volver</a>");
 
         } catch (NumberFormatException e) {
             sendErrorResponse(out, "Error: uno de los campos numéricos no es válido.");
@@ -101,3 +117,4 @@ public class DetalleVentasServlet extends HttpServlet {
         return "Servlet para manejar la inserción de detalles de venta";
     }
 }
+
